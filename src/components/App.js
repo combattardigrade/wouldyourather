@@ -15,21 +15,17 @@ class App extends Component {
   }
   render() {
     const { loading, authedUser } = this.props
-    
+
     return (
-      <Router>        
+      <Router>
         <Fragment >
           <LoadingBar />
           <MyNav />
-          {            
-            loading === true
-            ? null
-            : <div>              
-              <Route path='/login' exact component={Login} />
-              <PrivateRoute path='/new' component={NewQuestion} authedUser={authedUser} />
-              
-            </div>
-          }
+
+          <Route path='/login' exact component={Login} />
+          <PrivateRoute path='/new' component={NewQuestion} authedUser={authedUser} />
+
+
         </Fragment>
       </Router>
     );
@@ -38,23 +34,24 @@ class App extends Component {
 
 // auth redirect
 // https://reacttraining.com/react-router/web/example/auth-workflow
-function PrivateRoute({component: Component, ...rest }) {
+function PrivateRoute({ component: Component, ...rest }) {
   const { authedUser } = rest
+  
   return (
-    <Route 
-    {...rest}
-      render={ props => 
-        authedUser !== 'guest' ? (
+    <Route
+      {...rest}
+      render={props =>
+        authedUser !== null ? (
           <Component {...props} />
-        ) 
-        : (
-          <Redirect 
-            to={{
-              pathname: '/login'
+        )
+          : (
+            <Redirect
+              to={{
+                pathname: '/login'
 
-            }}
-          />
-        ) 
+              }}
+            />
+          )
       }
     />
   )
@@ -62,7 +59,7 @@ function PrivateRoute({component: Component, ...rest }) {
 
 function mapStateToProps({ authedUser }) {
   return {
-    loading: authedUser === null,
+
     authedUser
   }
 }
