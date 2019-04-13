@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Button, Container, Row, Col, ButtonGroup, ProgressBar, Badge } from 'react-bootstrap'
+import { Card, Button, Container, Row, Col, ButtonGroup, ProgressBar, Badge, Form } from 'react-bootstrap'
+import { handleAddAnswer } from '../actions/shared'
 
 class Question extends Component {
 
@@ -12,6 +13,16 @@ class Question extends Component {
         this.setState({
             option
         })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        const { dispatch } = this.props      
+        const { option } = this.state  
+        const qid = this.props.match.params.id
+        
+        dispatch(handleAddAnswer(qid, option))
+        
     }
 
     render() {
@@ -40,13 +51,18 @@ class Question extends Component {
                                             <Col>
                                                 <Card.Title>Would you rather...</Card.Title>
                                                 <Row>
-                                                    <Col><ButtonGroup vertical>
-                                                        <Button variant='light' onClick={(e) => { this.handleOptionChange('optionA') }} active={this.state.option === 'optionA'} >{questions[questionId].optionOne.text}</Button>
-                                                        <Button variant='light' className="mt-2" onClick={(e) => { this.handleOptionChange('optionB') }} active={this.state.option === 'optionB'}>{questions[questionId].optionTwo.text}</Button>
-                                                    </ButtonGroup></Col>
+                                                    <Col>
+                                                        <Form onSubmit={this.handleSubmit}>
+                                                            <ButtonGroup vertical style={{width:'100%'}}>
+                                                                <Button style={{borderRadius:'0.25rem',border:'1px solid #dfdfdf'}} variant='light' onClick={(e) => { this.handleOptionChange('optionOne') }} active={this.state.option === 'optionOne'} >{questions[questionId].optionOne.text}</Button>
+                                                                <Button style={{borderRadius:'0.25rem',border:'1px solid #dfdfdf'}} variant='light' className="mt-2" onClick={(e) => { this.handleOptionChange('optionTwo') }} active={this.state.option === 'optionTwo'}>{questions[questionId].optionTwo.text}</Button>
+                                                            </ButtonGroup>
+                                                            <Button type="submit" size="lg" block className="mt-2" variant="primary">Vote</Button>
+
+                                                        </Form>
+                                                    </Col>
                                                 </Row>
 
-                                                <Button onClick={this.handleClick} className="mt-2" variant="primary">Vote</Button>
                                             </Col>
                                         </Row>
                                     </Card.Body>
@@ -61,16 +77,16 @@ class Question extends Component {
                                             </Col>
                                             <Col>
                                                 <Card.Title>Results:</Card.Title>                                                
-                                                <div style={{backgroundColor:users[authedUser].answers[questionId] === 'optionOne' ? 'rgba(0, 123, 255, 0.17)':'#f7f7f7',padding:20,border:'1px solid rgb(223, 223, 223)'}}>
+                                                <div style={{backgroundColor:users[authedUser].answers[questionId] === 'optionOne' ? 'rgba(0, 123, 255, 0.17)':'#f7f7f7',padding:20,border:'1px solid rgb(223, 223, 223)',borderRadius:5}}>
                                                     {users[authedUser].answers[questionId] === 'optionOne' ? <Badge variant="warning">Your vote</Badge> : null}
                                                     <div style={{fontWeight:'bold',fontSize:22,padding:'10px 0px 20px 0px'}}>Woud you rather {questions[questionId].optionOne.text}?</div>
-                                                    <ProgressBar now={optionOneVotes / totalVotes * 100} label={`${optionOneVotes / totalVotes * 100}%`} />
+                                                    <ProgressBar now={optionOneVotes / totalVotes * 100} label={`${(optionOneVotes / totalVotes * 100).toFixed(2)}%`} />
                                                     <div style={{textAlign:'center',fontWeight:'bold',padding:'10px 0px'}}>{optionOneVotes} out of votes {totalVotes}</div>
                                                 </div>
-                                                <div style={{backgroundColor:users[authedUser].answers[questionId] === 'optionTwo' ? 'rgba(0, 123, 255, 0.17)':'#f7f7f7',padding:20,border:'1px solid rgb(223, 223, 223)',marginTop:20}}>
+                                                <div style={{backgroundColor:users[authedUser].answers[questionId] === 'optionTwo' ? 'rgba(0, 123, 255, 0.17)':'#f7f7f7',padding:20,border:'1px solid rgb(223, 223, 223)',marginTop:20,borderRadius:5}}>
                                                     {users[authedUser].answers[questionId] === 'optionTwo' ? <Badge variant="warning">Your vote</Badge> : null}
                                                     <div style={{fontWeight:'bold',fontSize:22,padding:'10px 0px 20px 0px'}}>Woud you rather {questions[questionId].optionTwo.text}?</div>
-                                                    <ProgressBar now={optionTwoVotes / totalVotes * 100} label={`${optionTwoVotes / totalVotes * 100}%`} />
+                                                    <ProgressBar now={optionTwoVotes / totalVotes * 100} label={`${(optionTwoVotes / totalVotes * 100).toFixed(2)}%`} />
                                                     <div style={{textAlign:'center',fontWeight:'bold',padding:'10px 0px'}}>{optionTwoVotes} out of votes {totalVotes}</div>
                                                 </div>                                                
                                             </Col>

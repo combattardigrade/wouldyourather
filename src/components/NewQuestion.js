@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Button, Container, Row, Col, Form } from 'react-bootstrap'
-import { handleAddQuestion } from '../actions/questions'
+import { handleAddQuestion } from '../actions/shared'
 import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
@@ -34,8 +34,7 @@ class NewQuestion extends Component {
         const { redirect } = this.state
         const { questions } = this.props
         if(redirect) {
-            let lastQuestion = (Object.values(questions).sort((a,b) => b.timestamp - a.timestamp))[0]
-            console.log(lastQuestion)
+            let lastQuestion = (Object.values(questions).sort((a,b) => b.timestamp - a.timestamp))[0]            
             return <Redirect to={'/questions/' + lastQuestion.id} />
         }
 
