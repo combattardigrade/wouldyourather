@@ -46,7 +46,7 @@ class Question extends Component {
                                     <Card.Body>
                                         <Row>
                                             <Col md={{ span: 4 }} style={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
-                                                <img src={users[authorId].avatarURL} style={{ borderRadius: '200px', width: '85%' }} />
+                                                <img src={users[authorId].avatarURL} style={{ borderRadius: '200px', width: '85%' }} alt="avatar" />
                                             </Col>
                                             <Col>
                                                 <Card.Title>Would you rather...</Card.Title>
@@ -73,7 +73,7 @@ class Question extends Component {
                                     <Card.Body>
                                         <Row>
                                             <Col md={{ span: 4 }} style={{ textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
-                                                <img src={users[authorId].avatarURL} style={{ borderRadius: '200px', width: '85%' }} />
+                                                <img src={users[authorId].avatarURL} style={{ borderRadius: '200px', width: '85%' }} alt="avatar" />
                                             </Col>
                                             <Col>
                                                 <Card.Title>Results:</Card.Title>                                                

@@ -28,7 +28,7 @@ class App extends Component {
             :
             <Fragment >
             <Route path='/login' exact component={Login} />
-            <PrivateRoute path='/new' component={NewQuestion} authedUser={authedUser} />
+            <PrivateRoute path='/add' component={NewQuestion} authedUser={authedUser} />
             <PrivateRoute path='/' exact component={Home} authedUser={authedUser} />
             <PrivateRoute path='/questions/:id' component={Question} authedUser={authedUser} />
             <PrivateRoute path='/leaderboard' component={Leaderboard} authedUser={authedUser} />

@@ -24,7 +24,7 @@ class MyNav extends Component {
                         <LinkContainer to="/" exact>
                             <Nav.Link >Home</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/new">
+                        <LinkContainer to="/add">
                             <Nav.Link >New Question</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/leaderboard">
@@ -37,7 +37,7 @@ class MyNav extends Component {
                                     ? <LinkContainer to="/login" ><Nav.Link >Login</Nav.Link></LinkContainer>
                                     : <Fragment>
                                         <div style={{display:'block',padding:'0.3rem 0',color:'white'}}>
-                                            <img style={{height:20,width:20,display:'inline-block',borderRadius:50,marginRight:10}} src={users[authedUser].avatarURL}></img>
+                                            <img style={{height:20,width:20,display:'inline-block',borderRadius:50,marginRight:10}} src={users[authedUser].avatarURL} alt="avatar"></img>
                                         </div>                                    
                                         <div style={{display:'block',padding:'0.5rem 1rem 0.5rem 0',color:'white'}}>                                        
                                             {users[authedUser].name}

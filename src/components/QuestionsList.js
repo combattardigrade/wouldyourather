@@ -16,14 +16,14 @@ function QuestionsList(props) {
                         <Card.Body>
                             <Row>
                                 <Col md={{span:4}}  style={{textAlign:'center',marginTop:'auto',marginBottom:'auto'}}>
-                                    <img src={users[q.author].avatarURL} style={{borderRadius: '200px',width:'85%'}}/>
+                                    <img src={users[q.author].avatarURL} style={{borderRadius: '200px',width:'85%'}} alt="avatar" />
                                 </Col>
                                 <Col>
                                     <Card.Title>Would you rather...</Card.Title>
 
                                     <ListGroup.Item>A) {q.optionOne.text}</ListGroup.Item>
                                     <ListGroup.Item>B) {q.optionTwo.text}</ListGroup.Item>
-                                    <Link to={'questions/' + q.id} > 
+                                    <Link to={'questions/' + q.id } > 
                                         <Button className="mt-2" variant="primary">View Poll</Button>
                                     </Link>
                                    

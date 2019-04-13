@@ -32,10 +32,13 @@ class NewQuestion extends Component {
     render() {
         
         const { redirect } = this.state
-        const { questions } = this.props
+        // const { questions } = this.props
         if(redirect) {
-            let lastQuestion = (Object.values(questions).sort((a,b) => b.timestamp - a.timestamp))[0]            
-            return <Redirect to={'/questions/' + lastQuestion.id} />
+            // redirect to home page
+            return <Redirect to={'/'} />
+            // let lastQuestion = (Object.values(questions).sort((a,b) => b.timestamp - a.timestamp))[0]                        
+            // redirect to voting page
+            // return <Redirect to={'/questions/' + lastQuestion.id} />
         }
 
         return (

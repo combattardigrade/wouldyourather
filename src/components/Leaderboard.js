@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Card, Button, Container, Row, Col, ButtonGroup, Input, ToggleButton, Form } from 'react-bootstrap'
+import { Card, Container, Row, Col  } from 'react-bootstrap'
 
 function Leaderboard(props) {
     const { scores } = props
