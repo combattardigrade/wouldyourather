@@ -13,6 +13,9 @@ class Login extends Component {
         
         // dispatch setAuthedUser
         dispatch(setAuthedUser(userId))
+
+        // redirect to home
+        this.props.history.push('/')
     }
     
 
@@ -40,8 +43,7 @@ class Login extends Component {
                                 type='submit'
                                 variant='primary'
                                 size="lg"
-                                block
-                                onClick={this.handleClick}
+                                block                               
                             >Login</Button>
                         </Form>
 
