@@ -14,8 +14,9 @@ class Login extends Component {
         // dispatch setAuthedUser
         dispatch(setAuthedUser(userId))
 
-        // redirect to home
-        this.props.history.push('/')
+        // redirect                 
+        let { from } = this.props.location.state ? this.props.location.state : '/'
+        this.props.history.push(from)
     }
     
 

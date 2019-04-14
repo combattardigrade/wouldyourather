@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Button, Container, Row, Col, ButtonGroup, ProgressBar, Badge, Form } from 'react-bootstrap'
 import { handleAddAnswer } from '../actions/shared'
+import NotFound from './NotFound'
 
 class Question extends Component {
 
@@ -17,17 +18,28 @@ class Question extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        
         const { dispatch } = this.props      
         const { option } = this.state  
-        const qid = this.props.match.params.id
-        
-        dispatch(handleAddAnswer(qid, option))
-        
+        const qid = this.props.match.params.id  
+
+        if(!option) {
+            alert('Please select an option.') 
+            return
+        }
+
+        dispatch(handleAddAnswer(qid, option))        
     }
 
     render() {
         const questionId = this.props.match.params.id
         const { questions, users, authedUser } = this.props
+
+        // check if questionId exists in questions                  
+        if(!(questionId in questions)) {
+            return <NotFound />
+        }
+
         const authorId = questions[questionId].author
         const authorName = users[authorId].name
         const optionOneVotes = (questions[questionId].optionOne.votes).length
